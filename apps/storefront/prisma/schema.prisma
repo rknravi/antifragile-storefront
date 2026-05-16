@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  sourceOrderId   String   @unique
+  status          String   @default("created")
+  gateway         String
+  paymentRef      String?
+  razorpayOrderId String?
+  customerJson    String
+  shippingJson    String
+  itemsJson       String
+  totalsJson      String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  productSlug String
+  rating      Int
+  title       String
+  body        String
+  authorName  String
+  createdAt   DateTime @default(now())
+
+  @@index([productSlug])
+}

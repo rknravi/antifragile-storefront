@@ -1,0 +1,123 @@
+[
+  {
+    "id": "prod_001",
+    "sku": "AF-CLEAN-150ML",
+    "name": "ANTIFRAGILE Soft Refresh Gel Cleanser",
+    "slug": "soft-refresh-gel-cleanser",
+    "image": "/products/antifragile-soft-refresh-gel-cleanser.png",
+    "category": "Cleanser",
+    "shortDescription": "A gentle daily gel cleanser for refreshed, resilient skin.",
+    "longDescription": "Soft Refresh lifts daily buildup without stripping. Formulated for everyday resilience—cleanse, then layer your routine with confidence.",
+    "size": "150 ml",
+    "mrp": 799,
+    "salePrice": 699,
+    "currency": "INR",
+    "inventoryQuantity": 100,
+    "skinTypes": ["All Skin Types", "Sensitive"],
+    "skinConcerns": ["Daily Care", "Dullness", "Freshness"],
+    "usageTime": ["Morning", "Night"],
+    "ingredients": ["Aqua", "Gentle surfactant blend", "Humectants", "Skin-conditioning agents"],
+    "howToUse": [
+      "Apply to damp skin.",
+      "Massage in gentle circles.",
+      "Rinse thoroughly and pat dry."
+    ],
+    "warnings": ["Patch test before first use.", "Avoid direct contact with eyes."],
+    "badges": ["Bestseller", "Launch Offer"],
+    "benefits": [
+      "Removes impurities without tightness",
+      "Prepares skin for serum and moisturizer",
+      "Fresh, balanced finish"
+    ],
+    "howItWorks": "Micelle-friendly cleansing helps lift oil and SPF while keeping barrier lipids comfortable.",
+    "texture": "Silky gel that rinses clean—no residue.",
+    "routinePairing": [
+      { "slug": "airy-whip-silk-cream-moisturizer", "label": "Airy Whip Silk Cream Moisturizer" },
+      { "slug": "pre-shift-renewal-serum", "label": "Pre-Shift Renewal Serum" }
+    ],
+    "seoTitle": "ANTIFRAGILE Soft Refresh Gel Cleanser | 150 ml",
+    "seoDescription": "Shop the ANTIFRAGILE Soft Refresh Gel Cleanser—daily gel cleanse for refreshed skin.",
+    "status": "active"
+  },
+  {
+    "id": "prod_002",
+    "sku": "AF-MOIST-50ML",
+    "name": "ANTIFRAGILE Airy Whip Silk Cream Moisturizer",
+    "slug": "airy-whip-silk-cream-moisturizer",
+    "image": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
+    "category": "Moisturizer",
+    "shortDescription": "Featherlight hydration with barrier-friendly silk cream comfort.",
+    "longDescription": "Airy Whip layers like silk—morning under SPF, night over serum. Built for bounce, not heaviness.",
+    "size": "50 ml",
+    "mrp": 1299,
+    "salePrice": 1149,
+    "currency": "INR",
+    "inventoryQuantity": 80,
+    "skinTypes": ["Combination", "Normal", "Dry"],
+    "skinConcerns": ["Dryness", "Daily Care", "Sensitive skin"],
+    "usageTime": ["Morning", "Night"],
+    "ingredients": ["Aqua", "Emollients", "Ceramide-supporting esters", "Humectants"],
+    "howToUse": [
+      "After cleansing (and serum at night), apply 2 pumps.",
+      "Press and glide outward from center of face."
+    ],
+    "warnings": ["Patch test before first use.", "Discontinue if irritation occurs."],
+    "badges": ["New", "Bundle"],
+    "benefits": [
+      "Locks in hydration without greasiness",
+      "Supports a resilient moisture barrier",
+      "Silk-cream finish for makeup-ready skin"
+    ],
+    "howItWorks": "Humectants draw water while emollients soften and seal—comfort without clog.",
+    "texture": "Airy whip that melts in—no tack.",
+    "routinePairing": [
+      { "slug": "soft-refresh-gel-cleanser", "label": "Soft Refresh Gel Cleanser" },
+      { "slug": "pre-shift-renewal-serum", "label": "Pre-Shift Renewal Serum" }
+    ],
+    "seoTitle": "ANTIFRAGILE Airy Whip Silk Cream Moisturizer",
+    "seoDescription": "Hydrate with ANTIFRAGILE Airy Whip—lightweight silk cream moisturizer.",
+    "status": "active"
+  },
+  {
+    "id": "prod_003",
+    "sku": "AF-SERUM-30ML",
+    "name": "ANTIFRAGILE Pre-Shift Renewal Serum",
+    "slug": "pre-shift-renewal-serum",
+    "image": "/products/antifragile-pre-shift-renewal-serum.png",
+    "category": "Serum",
+    "shortDescription": "Night-forward renewal for smoother, more even-looking skin.",
+    "longDescription": "Pre-Shift is your evening shift-change: targeted actives in a cushiony base designed for renewal without overwhelm.",
+    "size": "30 ml",
+    "mrp": 1499,
+    "salePrice": 1349,
+    "currency": "INR",
+    "inventoryQuantity": 60,
+    "skinTypes": ["Normal", "Combination"],
+    "skinConcerns": ["Dullness", "Night routine", "Daily Care"],
+    "usageTime": ["Night"],
+    "ingredients": ["Aqua", "Renewal-focused actives", "Soothing botanicals", "Stabilizers"],
+    "howToUse": [
+      "PM only: after cleansing, apply a thin layer.",
+      "Follow with Airy Whip moisturizer."
+    ],
+    "warnings": [
+      "Patch test before first use.",
+      "Use SPF in the morning when using renewal serums."
+    ],
+    "badges": ["Launch Offer"],
+    "benefits": [
+      "Supports overnight renewal",
+      "Helps improve the look of tone and texture",
+      "Pairs cleanly with moisturizer"
+    ],
+    "howItWorks": "Actives work in a buffered vehicle to reduce irritation risk while supporting cell turnover signals.",
+    "texture": "Silky serum—absorbs quickly, layers well.",
+    "routinePairing": [
+      { "slug": "soft-refresh-gel-cleanser", "label": "Soft Refresh Gel Cleanser" },
+      { "slug": "airy-whip-silk-cream-moisturizer", "label": "Airy Whip Silk Cream Moisturizer" }
+    ],
+    "seoTitle": "ANTIFRAGILE Pre-Shift Renewal Serum",
+    "seoDescription": "Night renewal serum from ANTIFRAGILE—Pre-Shift for smoother-looking skin.",
+    "status": "active"
+  }
+]
