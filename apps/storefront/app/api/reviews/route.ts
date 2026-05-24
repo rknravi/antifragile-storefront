@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getActiveProducts } from "@/lib/get-catalog";
+import { computeReviewSummary } from "@/lib/review-stats";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -9,7 +10,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Missing or invalid slug." }, { status: 400 });
   }
   if (!process.env.DATABASE_URL) {
-    return NextResponse.json({ reviews: [] });
+    return NextResponse.json({ reviews: [], summary: null });
   }
   try {
     const reviews = await prisma.review.findMany({
@@ -25,7 +26,8 @@ export async function GET(req: Request) {
         createdAt: true,
       },
     });
-    return NextResponse.json({ reviews });
+    const summary = computeReviewSummary(reviews.map((r) => r.rating));
+    return NextResponse.json({ reviews, summary });
   } catch {
     return NextResponse.json({ error: "Could not load reviews." }, { status: 500 });
   }

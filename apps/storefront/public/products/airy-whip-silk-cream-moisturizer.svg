@@ -1,10 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img" aria-label="Moisturizer placeholder">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img" aria-label="ANTIFRAGILE Airy Whip Silk Cream Moisturizer">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7EB8C4"/>
+    <linearGradient id="jar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5A9BA8"/>
       <stop offset="100%" stop-color="#B8DDE6"/>
     </linearGradient>
+    <linearGradient id="lid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4A8A96"/>
+      <stop offset="100%" stop-color="#5A9BA8"/>
+    </linearGradient>
   </defs>
-  <rect width="800" height="1000" fill="url(#g)"/>
-  <text x="400" y="520" text-anchor="middle" fill="rgba(30,41,59,0.35)" font-family="system-ui,sans-serif" font-size="28" font-weight="600">Moisturizer</text>
+  <ellipse cx="400" cy="880" rx="150" ry="24" fill="rgba(90,155,168,0.1)"/>
+  <g transform="translate(400 530)">
+    <ellipse cx="0" cy="-210" rx="100" ry="22" fill="url(#lid)"/>
+    <rect x="-100" y="-188" width="200" height="36" rx="6" fill="url(#lid)"/>
+    <path d="M-110,-152 Q-110,180 0,200 Q110,180 110,-152 Z" fill="url(#jar)"/>
+    <ellipse cx="0" cy="-152" rx="110" ry="28" fill="rgba(255,255,255,0.2)"/>
+    <text y="20" text-anchor="middle" fill="#1A3A42" font-family="system-ui,sans-serif" font-size="22" font-weight="700" letter-spacing="0.12em">ANTIFRAGILE</text>
+    <text y="52" text-anchor="middle" fill="rgba(26,58,66,0.9)" font-family="system-ui,sans-serif" font-size="14" font-weight="600">AIRY WHIP</text>
+    <text y="74" text-anchor="middle" fill="rgba(26,58,66,0.75)" font-family="system-ui,sans-serif" font-size="12">SILK CREAM · 50 ML</text>
+  </g>
+  <text x="400" y="120" text-anchor="middle" fill="#5A9BA8" font-family="system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="0.2em">SEAL</text>
 </svg>

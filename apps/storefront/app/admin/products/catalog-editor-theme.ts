@@ -1,0 +1,31 @@
+import type { CSSProperties } from "react";
+
+/** Admin catalog tree — readable, high-contrast JSON colors on a soft panel. */
+export const catalogJsonTreeTheme: CSSProperties = {
+  "--w-rjv-background-color": "#f4f5f7",
+  "--w-rjv-font-family": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+  "--w-rjv-font-size": "13px",
+  "--w-rjv-line-height": "1.55",
+  "--w-rjv-color": "#1a1a1a",
+  "--w-rjv-key-string": "#7c3aed",
+  "--w-rjv-arrow-color": "#6b7280",
+  "--w-rjv-brackets-color": "#374151",
+  "--w-rjv-curlybraces-color": "#374151",
+  "--w-rjv-colon-color": "#6b7280",
+  "--w-rjv-quotes-color": "#0d9488",
+  "--w-rjv-quotes-string-color": "#0d6832",
+  "--w-rjv-type-string-color": "#0d6832",
+  "--w-rjv-type-int-color": "#1d4ed8",
+  "--w-rjv-type-float-color": "#1d4ed8",
+  "--w-rjv-type-bigint-color": "#1d4ed8",
+  "--w-rjv-type-boolean-color": "#b45309",
+  "--w-rjv-type-date-color": "#1d4ed8",
+  "--w-rjv-type-null-color": "#6b7280",
+  "--w-rjv-type-undefined-color": "#6b7280",
+  "--w-rjv-type-url-color": "#0369a1",
+  "--w-rjv-ellipsis-color": "#9ca3af",
+  "--w-rjv-info-color": "#9ca3af",
+  "--w-rjv-copied-color": "#047857",
+  "--w-rjv-copied-success-color": "#047857",
+  "--w-rjv-update-color": "#7c3aed",
+} as CSSProperties;

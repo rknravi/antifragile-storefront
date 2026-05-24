@@ -5,6 +5,19 @@
     "name": "ANTIFRAGILE Soft Refresh Gel Cleanser",
     "slug": "soft-refresh-gel-cleanser",
     "image": "/products/antifragile-soft-refresh-gel-cleanser.png",
+    "thumbnail": "/products/antifragile-soft-refresh-gel-cleanser.png",
+    "gallery": [
+      "/products/antifragile-soft-refresh-gel-cleanser.png"
+    ],
+    "hoverImage": "/products/antifragile-soft-refresh-gel-cleanser.png",
+    "videoUrl": "https://assets.mixkit.co/videos/preview/mixkit-woman-applying-cream-on-her-face-4212-large.mp4",
+    "videoPoster": "/products/antifragile-soft-refresh-gel-cleanser.png",
+    "beforeAfter": {
+      "before": "https://images.unsplash.com/photo-1570554886111-e80fcca6a029?w=800&q=80&auto=format&fit=crop",
+      "after": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80&auto=format&fit=crop",
+      "label": "4-week radiance demo (sample imagery)"
+    },
+    "lowStockThreshold": 15,
     "category": "Cleanser",
     "shortDescription": "A gentle daily gel cleanser for refreshed, resilient skin.",
     "longDescription": "Soft Refresh lifts daily buildup without stripping. Formulated for everyday resilience—cleanse, then layer your routine with confidence.",
@@ -12,18 +25,39 @@
     "mrp": 799,
     "salePrice": 699,
     "currency": "INR",
-    "inventoryQuantity": 100,
-    "skinTypes": ["All Skin Types", "Sensitive"],
-    "skinConcerns": ["Daily Care", "Dullness", "Freshness"],
-    "usageTime": ["Morning", "Night"],
-    "ingredients": ["Aqua", "Gentle surfactant blend", "Humectants", "Skin-conditioning agents"],
+    "inventoryQuantity": 12,
+    "skinTypes": [
+      "All Skin Types",
+      "Sensitive"
+    ],
+    "skinConcerns": [
+      "Daily Care",
+      "Dullness",
+      "Freshness"
+    ],
+    "usageTime": [
+      "Morning",
+      "Night"
+    ],
+    "ingredients": [
+      "Aqua",
+      "Gentle surfactant blend",
+      "Humectants",
+      "Skin-conditioning agents"
+    ],
     "howToUse": [
       "Apply to damp skin.",
       "Massage in gentle circles.",
       "Rinse thoroughly and pat dry."
     ],
-    "warnings": ["Patch test before first use.", "Avoid direct contact with eyes."],
-    "badges": ["Bestseller", "Launch Offer"],
+    "warnings": [
+      "Patch test before first use.",
+      "Avoid direct contact with eyes."
+    ],
+    "badges": [
+      "Bestseller",
+      "Launch Offer"
+    ],
     "benefits": [
       "Removes impurities without tightness",
       "Prepares skin for serum and moisturizer",
@@ -32,8 +66,14 @@
     "howItWorks": "Micelle-friendly cleansing helps lift oil and SPF while keeping barrier lipids comfortable.",
     "texture": "Silky gel that rinses clean—no residue.",
     "routinePairing": [
-      { "slug": "airy-whip-silk-cream-moisturizer", "label": "Airy Whip Silk Cream Moisturizer" },
-      { "slug": "pre-shift-renewal-serum", "label": "Pre-Shift Renewal Serum" }
+      {
+        "slug": "airy-whip-silk-cream-moisturizer",
+        "label": "Airy Whip Silk Cream Moisturizer"
+      },
+      {
+        "slug": "pre-shift-renewal-serum",
+        "label": "Pre-Shift Renewal Serum"
+      }
     ],
     "seoTitle": "ANTIFRAGILE Soft Refresh Gel Cleanser | 150 ml",
     "seoDescription": "Shop the ANTIFRAGILE Soft Refresh Gel Cleanser—daily gel cleanse for refreshed skin.",
@@ -45,6 +85,19 @@
     "name": "ANTIFRAGILE Airy Whip Silk Cream Moisturizer",
     "slug": "airy-whip-silk-cream-moisturizer",
     "image": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
+    "thumbnail": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
+    "gallery": [
+      "/products/antifragile-airy-veil-silk-cream-moisturizer.png"
+    ],
+    "hoverImage": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
+    "videoUrl": "https://assets.mixkit.co/videos/preview/mixkit-woman-applying-cream-on-her-face-4212-large.mp4",
+    "videoPoster": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
+    "beforeAfter": {
+      "before": "https://images.unsplash.com/photo-1570554886111-e80fcca6a029?w=800&q=80&auto=format&fit=crop",
+      "after": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80&auto=format&fit=crop",
+      "label": "Hydration boost — sample comparison"
+    },
+    "lowStockThreshold": 10,
     "category": "Moisturizer",
     "shortDescription": "Featherlight hydration with barrier-friendly silk cream comfort.",
     "longDescription": "Airy Whip layers like silk—morning under SPF, night over serum. Built for bounce, not heaviness.",
@@ -53,16 +106,38 @@
     "salePrice": 1149,
     "currency": "INR",
     "inventoryQuantity": 80,
-    "skinTypes": ["Combination", "Normal", "Dry"],
-    "skinConcerns": ["Dryness", "Daily Care", "Sensitive skin"],
-    "usageTime": ["Morning", "Night"],
-    "ingredients": ["Aqua", "Emollients", "Ceramide-supporting esters", "Humectants"],
+    "skinTypes": [
+      "Combination",
+      "Normal",
+      "Dry"
+    ],
+    "skinConcerns": [
+      "Dryness",
+      "Daily Care",
+      "Sensitive skin"
+    ],
+    "usageTime": [
+      "Morning",
+      "Night"
+    ],
+    "ingredients": [
+      "Aqua",
+      "Emollients",
+      "Ceramide-supporting esters",
+      "Humectants"
+    ],
     "howToUse": [
       "After cleansing (and serum at night), apply 2 pumps.",
       "Press and glide outward from center of face."
     ],
-    "warnings": ["Patch test before first use.", "Discontinue if irritation occurs."],
-    "badges": ["New", "Bundle"],
+    "warnings": [
+      "Patch test before first use.",
+      "Discontinue if irritation occurs."
+    ],
+    "badges": [
+      "New",
+      "Bundle"
+    ],
     "benefits": [
       "Locks in hydration without greasiness",
       "Supports a resilient moisture barrier",
@@ -71,8 +146,14 @@
     "howItWorks": "Humectants draw water while emollients soften and seal—comfort without clog.",
     "texture": "Airy whip that melts in—no tack.",
     "routinePairing": [
-      { "slug": "soft-refresh-gel-cleanser", "label": "Soft Refresh Gel Cleanser" },
-      { "slug": "pre-shift-renewal-serum", "label": "Pre-Shift Renewal Serum" }
+      {
+        "slug": "soft-refresh-gel-cleanser",
+        "label": "Soft Refresh Gel Cleanser"
+      },
+      {
+        "slug": "pre-shift-renewal-serum",
+        "label": "Pre-Shift Renewal Serum"
+      }
     ],
     "seoTitle": "ANTIFRAGILE Airy Whip Silk Cream Moisturizer",
     "seoDescription": "Hydrate with ANTIFRAGILE Airy Whip—lightweight silk cream moisturizer.",
@@ -84,6 +165,14 @@
     "name": "ANTIFRAGILE Pre-Shift Renewal Serum",
     "slug": "pre-shift-renewal-serum",
     "image": "/products/antifragile-pre-shift-renewal-serum.png",
+    "thumbnail": "/products/antifragile-pre-shift-renewal-serum.png",
+    "gallery": [
+      "/products/antifragile-pre-shift-renewal-serum.png"
+    ],
+    "hoverImage": "/products/antifragile-pre-shift-renewal-serum.png",
+    "videoUrl": "https://assets.mixkit.co/videos/preview/mixkit-woman-applying-cream-on-her-face-4212-large.mp4",
+    "videoPoster": "/products/antifragile-pre-shift-renewal-serum.png",
+    "lowStockThreshold": 8,
     "category": "Serum",
     "shortDescription": "Night-forward renewal for smoother, more even-looking skin.",
     "longDescription": "Pre-Shift is your evening shift-change: targeted actives in a cushiony base designed for renewal without overwhelm.",
@@ -92,10 +181,24 @@
     "salePrice": 1349,
     "currency": "INR",
     "inventoryQuantity": 60,
-    "skinTypes": ["Normal", "Combination"],
-    "skinConcerns": ["Dullness", "Night routine", "Daily Care"],
-    "usageTime": ["Night"],
-    "ingredients": ["Aqua", "Renewal-focused actives", "Soothing botanicals", "Stabilizers"],
+    "skinTypes": [
+      "Normal",
+      "Combination"
+    ],
+    "skinConcerns": [
+      "Dullness",
+      "Night routine",
+      "Daily Care"
+    ],
+    "usageTime": [
+      "Night"
+    ],
+    "ingredients": [
+      "Aqua",
+      "Renewal-focused actives",
+      "Soothing botanicals",
+      "Stabilizers"
+    ],
     "howToUse": [
       "PM only: after cleansing, apply a thin layer.",
       "Follow with Airy Whip moisturizer."
@@ -104,7 +207,9 @@
       "Patch test before first use.",
       "Use SPF in the morning when using renewal serums."
     ],
-    "badges": ["Launch Offer"],
+    "badges": [
+      "Launch Offer"
+    ],
     "benefits": [
       "Supports overnight renewal",
       "Helps improve the look of tone and texture",
@@ -113,8 +218,14 @@
     "howItWorks": "Actives work in a buffered vehicle to reduce irritation risk while supporting cell turnover signals.",
     "texture": "Silky serum—absorbs quickly, layers well.",
     "routinePairing": [
-      { "slug": "soft-refresh-gel-cleanser", "label": "Soft Refresh Gel Cleanser" },
-      { "slug": "airy-whip-silk-cream-moisturizer", "label": "Airy Whip Silk Cream Moisturizer" }
+      {
+        "slug": "soft-refresh-gel-cleanser",
+        "label": "Soft Refresh Gel Cleanser"
+      },
+      {
+        "slug": "airy-whip-silk-cream-moisturizer",
+        "label": "Airy Whip Silk Cream Moisturizer"
+      }
     ],
     "seoTitle": "ANTIFRAGILE Pre-Shift Renewal Serum",
     "seoDescription": "Night renewal serum from ANTIFRAGILE—Pre-Shift for smoother-looking skin.",

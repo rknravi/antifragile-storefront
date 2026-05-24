@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCatalog } from "@/lib/get-catalog";
 import { resolveCheckoutFromCatalog, type CheckoutItemInput } from "@/lib/checkout-order";
-import { validateNameEmailMobile } from "@/lib/checkout-validation";
+import { validateCheckoutFields } from "@/lib/checkout-validation";
 
 type Gateway = "razorpay" | "cashfree";
 
@@ -25,6 +25,7 @@ export async function POST(req: Request) {
     items?: CheckoutItemInput[];
     coupon?: string | null;
     customer?: { name?: string; email?: string; phone?: string };
+    shippingAddress?: { address?: string; city?: string; pin?: string; gstNumber?: string };
   };
   try {
     body = (await req.json()) as typeof body;
@@ -39,13 +40,18 @@ export async function POST(req: Request) {
   const coupon = typeof body.coupon === "string" ? body.coupon : null;
 
   const cust = body.customer ?? {};
-  const customerErr = validateNameEmailMobile({
+  const ship = body.shippingAddress ?? {};
+  const checkoutErr = validateCheckoutFields({
     name: typeof cust.name === "string" ? cust.name : "",
     email: typeof cust.email === "string" ? cust.email : "",
     mobile: typeof cust.phone === "string" ? cust.phone : "",
+    address: typeof ship.address === "string" ? ship.address : "",
+    city: typeof ship.city === "string" ? ship.city : "",
+    pin: typeof ship.pin === "string" ? ship.pin : "",
+    gstNumber: typeof ship.gstNumber === "string" ? ship.gstNumber : undefined,
   });
-  if (customerErr) {
-    return NextResponse.json({ error: customerErr }, { status: 400 });
+  if (checkoutErr) {
+    return NextResponse.json({ error: checkoutErr }, { status: 400 });
   }
 
   let resolved;
@@ -123,9 +129,9 @@ export async function POST(req: Request) {
   }
 
   const orderId = `af_cf_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-  const phone = (body.customer?.phone || "9999999999").replace(/\D/g, "").slice(-10) || "9999999999";
-  const email = body.customer?.email || "customer@example.com";
-  const name = (body.customer?.name || "Customer").replace(/[^\w\s\-.,]/g, "").slice(0, 50) || "Customer";
+  const phone = String(cust.phone ?? "").replace(/\D/g, "").slice(-10);
+  const email = String(cust.email ?? "").trim().toLowerCase();
+  const name = String(cust.name ?? "Customer").replace(/[^\w\s\-.,]/g, "").slice(0, 50) || "Customer";
 
   const cfRes = await fetch(`${cashfreeBaseUrl()}/orders`, {
     method: "POST",

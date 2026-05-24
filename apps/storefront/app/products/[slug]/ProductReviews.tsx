@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { StarRating } from "@/components/StarRating";
+import { formatReviewAverage, type ReviewSummary } from "@/lib/review-stats";
 
 type ReviewRow = {
   id: string;
@@ -13,6 +15,7 @@ type ReviewRow = {
 
 export function ProductReviews({ slug }: { slug: string }) {
   const [reviews, setReviews] = useState<ReviewRow[]>([]);
+  const [summary, setSummary] = useState<ReviewSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -25,8 +28,9 @@ export function ProductReviews({ slug }: { slug: string }) {
     setLoading(true);
     try {
       const r = await fetch(`/api/reviews?slug=${encodeURIComponent(slug)}`);
-      const j = (await r.json()) as { reviews?: ReviewRow[] };
+      const j = (await r.json()) as { reviews?: ReviewRow[]; summary?: ReviewSummary | null };
       setReviews(Array.isArray(j.reviews) ? j.reviews : []);
+      setSummary(j.summary ?? null);
     } catch {
       setReviews([]);
     } finally {
@@ -59,17 +63,30 @@ export function ProductReviews({ slug }: { slug: string }) {
       setRating(5);
       setMsg("Thanks — your review was posted.");
       await load();
+      window.dispatchEvent(new Event("af-reviews-updated"));
     } finally {
       setBusy(false);
     }
   }
 
   return (
-    <section className="mx-auto max-w-6xl border-t border-black/5 px-4 py-12 md:px-6">
-      <h2 className="font-display text-2xl text-neutral-900">Reviews</h2>
-      <p className="mt-2 text-sm text-neutral-600">
-        Reviews are stored when <code className="rounded bg-neutral-100 px-1">DATABASE_URL</code> is configured.
-      </p>
+    <section id="product-reviews" className="mx-auto max-w-6xl scroll-mt-24 border-t border-black/5 px-4 py-12 md:px-6">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 className="font-display text-2xl text-neutral-900">Reviews</h2>
+          {summary && summary.count > 0 ? (
+            <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-neutral-600">
+              <StarRating value={summary.average} size="sm" />
+              <span className="font-semibold text-neutral-900">
+                {formatReviewAverage(summary.average)}/5
+              </span>
+              <span>· {summary.count} review{summary.count === 1 ? "" : "s"}</span>
+            </p>
+          ) : (
+            <p className="mt-2 text-sm text-neutral-600">Share your experience with this product.</p>
+          )}
+        </div>
+      </div>
 
       <form onSubmit={submit} className="mt-8 max-w-xl space-y-4 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
         <p className="text-sm font-semibold text-neutral-900">Write a review</p>
@@ -137,10 +154,10 @@ export function ProductReviews({ slug }: { slug: string }) {
         ) : (
           reviews.map((r) => (
             <article key={r.id} className="rounded-2xl border border-black/5 bg-brand-sand/50 p-5">
-              <p className="text-sm font-semibold text-neutral-900">
-                {r.title}{" "}
-                <span className="font-normal text-amber-700">{"★".repeat(r.rating)}</span>
-              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-sm font-semibold text-neutral-900">{r.title}</p>
+                <StarRating value={r.rating} size="sm" accent="#B45309" />
+              </div>
               <p className="mt-1 text-xs text-neutral-500">
                 {r.authorName} · {new Date(r.createdAt).toLocaleDateString()}
               </p>

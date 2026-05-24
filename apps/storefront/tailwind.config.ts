@@ -16,10 +16,27 @@ const config: Config = {
           mist: "#E8F4F8",
           sand: "#FAF8F5",
         },
+        rays: {
+          black: "#0A0A0A",
+          white: "#FAF8F5",
+          cream: "#F5F0E8",
+          accent: "#FF5C00",
+          "accent-light": "#FFB380",
+          gray: "#8A6B55",
+          line: "#E8DDD4",
+          surface: "#F0EBE3",
+        },
+      },
+      fontSize: {
+        "product-title": ["1.3125rem", { lineHeight: "1.35", letterSpacing: "-0.02em", fontWeight: "600" }],
+        "pdp-title": ["2.25rem", { lineHeight: "1.12", letterSpacing: "-0.03em", fontWeight: "600" }],
+        "pdp-title-lg": ["2.75rem", { lineHeight: "1.1", letterSpacing: "-0.03em", fontWeight: "600" }],
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "Georgia", "serif"],
+        rays: ["var(--font-rays-display)", "system-ui", "sans-serif"],
+        "rays-sans": ["var(--font-rays-sans)", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         "hero-mesh":

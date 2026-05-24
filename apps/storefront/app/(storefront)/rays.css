@@ -1,0 +1,47 @@
+.rays-theme {
+  color-scheme: light;
+}
+
+.rays-theme ::selection {
+  background-color: #ff5c00;
+  color: #faf8f5;
+}
+
+@keyframes rays-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.rays-marquee {
+  animation: rays-marquee 28s linear infinite;
+}
+
+@keyframes rays-hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rays-hero-product-in {
+  animation: rays-hero-fade-in 0.55s ease-out forwards;
+}
+
+/** Knock out white JPEG/PNG pack-shot backgrounds on white or cream UI. */
+.pack-shot-cutout {
+  mix-blend-mode: multiply;
+}
+
+/** On dark hero/lookbook — show transparent SVG/PNG without multiply. */
+.pack-shot-cutout--on-dark {
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
+}

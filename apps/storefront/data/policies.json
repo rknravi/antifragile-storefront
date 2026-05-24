@@ -1,0 +1,39 @@
+{
+  "shipping": {
+    "slug": "shipping",
+    "title": "Shipping policy",
+    "paragraphs": [
+      "Pan-India shipping. Processing 1–2 business days. Carriers and SLAs to be finalized at launch.",
+      "Free shipping applies on carts above ₹999."
+    ]
+  },
+  "returns": {
+    "slug": "returns",
+    "title": "Return and refund policy",
+    "paragraphs": [
+      "Placeholder policy text. Replace with legal-reviewed copy. Outline eligibility windows, hygiene exceptions, and refund timelines tied to payment settlements."
+    ]
+  },
+  "privacy": {
+    "slug": "privacy",
+    "title": "Privacy policy",
+    "paragraphs": [
+      "Placeholder. Describe data collected (orders, analytics), lawful basis, retention, subprocessors (hosting, payments, email), and user rights."
+    ]
+  },
+  "terms": {
+    "slug": "terms",
+    "title": "Terms and conditions",
+    "paragraphs": [
+      "Placeholder governing law, site use, product disclaimers, and limitation of liability."
+    ]
+  },
+  "cancellation": {
+    "slug": "cancellation",
+    "title": "Cancellation policy",
+    "paragraphs": [
+      "Orders may be cancellable before dispatch. Post-dispatch, returns follow the return policy.",
+      "See our returns and refund policy for post-dispatch cases."
+    ]
+  }
+}

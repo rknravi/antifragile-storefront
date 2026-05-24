@@ -31,6 +31,32 @@ function parseOptionalImageField(value: unknown, field: string, slug: string): s
   throw new Error(`${field} must start with / or https:// for ${slug}`);
 }
 
+function parseOptionalImageList(value: unknown, field: string, slug: string): string[] | undefined {
+  if (value === undefined || value === null) return undefined;
+  if (!Array.isArray(value)) throw new Error(`${field} must be an array for ${slug}`);
+  const out: string[] = [];
+  value.forEach((item, i) => {
+    const parsed = parseOptionalImageField(item, `${field}[${i}]`, slug);
+    if (parsed) out.push(parsed);
+  });
+  return out.length ? out : undefined;
+}
+
+function parseOptionalHttpsUrl(value: unknown, field: string, slug: string): string | undefined {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value !== "string") throw new Error(`${field} must be a string for ${slug}`);
+  const s = value.trim();
+  if (!s) return undefined;
+  if (!s.startsWith("https://")) throw new Error(`${field} must be https:// for ${slug}`);
+  try {
+    const u = new URL(s);
+    if (u.protocol !== "https:") throw new Error("invalid");
+    return s;
+  } catch {
+    throw new Error(`Invalid ${field} URL for ${slug}`);
+  }
+}
+
 /** Minimal validation for admin saves and remote catalog fetches. */
 export function parseCatalogJson(data: unknown): Product[] {
   if (!Array.isArray(data)) throw new Error("Catalog must be a JSON array of products.");
@@ -49,16 +75,48 @@ export function parseCatalogJson(data: unknown): Product[] {
     if (!Array.isArray(usageTime) || !usageTime.every((u) => USAGE.includes(u as (typeof USAGE)[number]))) {
       throw new Error(`Invalid usageTime for ${String(row.slug)}`);
     }
-    const image = parseOptionalImageField(row.image, "image", String(row.slug));
-    const thumbnail = parseOptionalImageField(row.thumbnail, "thumbnail", String(row.slug));
+    const slug = String(row.slug);
+    const image = parseOptionalImageField(row.image, "image", slug);
+    const thumbnail = parseOptionalImageField(row.thumbnail, "thumbnail", slug);
+    const gallery = parseOptionalImageList(row.gallery, "gallery", slug);
+    const hoverImage = parseOptionalImageField(row.hoverImage, "hoverImage", slug);
+    const videoUrl = parseOptionalHttpsUrl(row.videoUrl, "videoUrl", slug);
+    const videoPoster = parseOptionalImageField(row.videoPoster, "videoPoster", slug);
+    const lowStockThreshold =
+      row.lowStockThreshold === undefined || row.lowStockThreshold === null
+        ? undefined
+        : Number(row.lowStockThreshold);
+
+    let beforeAfter: Product["beforeAfter"];
+    if (row.beforeAfter !== undefined && row.beforeAfter !== null) {
+      if (!isRecord(row.beforeAfter)) throw new Error(`Invalid beforeAfter for ${slug}`);
+      const before = parseOptionalImageField(row.beforeAfter.before, "beforeAfter.before", slug);
+      const after = parseOptionalImageField(row.beforeAfter.after, "beforeAfter.after", slug);
+      if (!before || !after) throw new Error(`beforeAfter requires before and after images for ${slug}`);
+      beforeAfter = {
+        before,
+        after,
+        ...(typeof row.beforeAfter.label === "string" && row.beforeAfter.label.trim()
+          ? { label: row.beforeAfter.label.trim() }
+          : {}),
+      };
+    }
 
     const p: Product = {
       id: String(row.id),
       sku: String(row.sku),
       name: String(row.name),
-      slug: String(row.slug),
+      slug,
       ...(image !== undefined ? { image } : {}),
       ...(thumbnail !== undefined ? { thumbnail } : {}),
+      ...(gallery !== undefined ? { gallery } : {}),
+      ...(hoverImage !== undefined ? { hoverImage } : {}),
+      ...(videoUrl !== undefined ? { videoUrl } : {}),
+      ...(videoPoster !== undefined ? { videoPoster } : {}),
+      ...(beforeAfter !== undefined ? { beforeAfter } : {}),
+      ...(lowStockThreshold !== undefined && Number.isFinite(lowStockThreshold) && lowStockThreshold >= 0
+        ? { lowStockThreshold }
+        : {}),
       category: category as Product["category"],
       shortDescription: String(row.shortDescription),
       longDescription: String(row.longDescription),

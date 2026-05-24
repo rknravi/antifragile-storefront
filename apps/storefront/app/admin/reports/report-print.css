@@ -1,0 +1,76 @@
+/* Screen: hide print-only header */
+.report-print-header {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 12mm;
+    size: A4;
+  }
+
+  body.admin-report-printing * {
+    visibility: hidden;
+  }
+
+  body.admin-report-printing #admin-report-printable,
+  body.admin-report-printing #admin-report-printable * {
+    visibility: visible;
+  }
+
+  body.admin-report-printing #admin-report-printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    background: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .report-print-header {
+    display: block !important;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #171717;
+  }
+
+  .report-print-header h1 {
+    font-size: 18pt;
+    margin: 0 0 4pt;
+  }
+
+  .report-print-header p {
+    font-size: 9pt;
+    color: #525252;
+    margin: 0;
+  }
+
+  #admin-report-printable {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  #admin-report-printable table {
+    font-size: 9pt;
+    page-break-inside: auto;
+  }
+
+  #admin-report-printable tr {
+    page-break-inside: avoid;
+  }
+
+  #admin-report-printable thead {
+    display: table-header-group;
+  }
+
+  /* Charts: ensure bars and donuts print */
+  #admin-report-printable [style*="background"],
+  #admin-report-printable [style*="conic-gradient"] {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

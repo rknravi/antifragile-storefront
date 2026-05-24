@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { secondaryNav } from "@/lib/site-nav";
 
 const policies = [
   { href: "/shipping-policy", label: "Shipping" },
@@ -20,21 +21,18 @@ export function SiteFooter() {
           <p className="mt-4 text-xs text-neutral-500">RKN Overseas</p>
         </div>
         <div>
-          <p className="text-sm font-semibold text-neutral-900">Explore</p>
+          <p className="text-sm font-semibold text-neutral-900">More</p>
           <ul className="mt-3 space-y-2 text-sm text-neutral-600">
-            <li>
-              <Link href="/shop" className="hover:text-neutral-900">
-                Shop all
-              </Link>
-            </li>
+            {secondaryNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="hover:text-neutral-900">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
             <li>
               <Link href="/faq" className="hover:text-neutral-900">
                 FAQ
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-neutral-900">
-                Contact
               </Link>
             </li>
           </ul>

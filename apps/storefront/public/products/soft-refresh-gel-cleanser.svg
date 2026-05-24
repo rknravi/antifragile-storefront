@@ -1,10 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img" aria-label="Cleanser placeholder">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img" aria-label="ANTIFRAGILE Soft Refresh Gel Cleanser">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="tube" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#1E4A6E"/>
       <stop offset="100%" stop-color="#3A7CA5"/>
     </linearGradient>
+    <linearGradient id="cap" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#163A56"/>
+      <stop offset="100%" stop-color="#1E4A6E"/>
+    </linearGradient>
   </defs>
-  <rect width="800" height="1000" fill="url(#g)"/>
-  <text x="400" y="520" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="system-ui,sans-serif" font-size="28" font-weight="600">Cleanser</text>
+  <ellipse cx="400" cy="880" rx="140" ry="24" fill="rgba(30,74,110,0.08)"/>
+  <g transform="translate(400 520)">
+    <rect x="-72" y="-200" width="144" height="36" rx="8" fill="url(#cap)"/>
+    <rect x="-88" y="-168" width="176" height="320" rx="44" fill="url(#tube)"/>
+    <rect x="-72" y="-140" width="144" height="200" rx="28" fill="rgba(255,255,255,0.12)"/>
+    <text y="60" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif" font-size="22" font-weight="700" letter-spacing="0.12em">ANTIFRAGILE</text>
+    <text y="92" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="system-ui,sans-serif" font-size="14" font-weight="600">SOFT REFRESH</text>
+    <text y="114" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="system-ui,sans-serif" font-size="12">GEL CLEANSER · 150 ML</text>
+  </g>
+  <text x="400" y="120" text-anchor="middle" fill="#1E4A6E" font-family="system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="0.2em">CLEANSE</text>
 </svg>

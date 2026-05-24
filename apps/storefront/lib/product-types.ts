@@ -9,6 +9,17 @@ export type Product = {
   image?: string;
   /** Optional smaller image for grids/cart; defaults to `image` in UI */
   thumbnail?: string;
+  /** Extra PDP / gallery angles (high-res, zoom) */
+  gallery?: string[];
+  /** Second image shown on card hover (image rollover) */
+  hoverImage?: string;
+  /** Product usage / how-to video URL (mp4 or embed) */
+  videoUrl?: string;
+  videoPoster?: string;
+  /** Before/after comparison slider */
+  beforeAfter?: { before: string; after: string; label?: string };
+  /** Show low-stock urgency below this count */
+  lowStockThreshold?: number;
   category: "Cleanser" | "Moisturizer" | "Serum";
   shortDescription: string;
   longDescription: string;

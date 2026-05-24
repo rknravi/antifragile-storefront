@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-export function IngredientAccordion({ ingredients }: { ingredients: string[] }) {
+export function IngredientAccordion({
+  ingredients,
+  glossaryHref = "/ingredients",
+}: {
+  ingredients: string[];
+  glossaryHref?: string;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -24,7 +30,10 @@ export function IngredientAccordion({ ingredients }: { ingredients: string[] }) 
             ))}
           </ul>
           <p className="mt-3 text-xs text-neutral-500">
-            Full INCI on pack. Glossary: <a className="underline" href="/ingredients">/ingredients</a>
+            Full INCI on pack. Glossary:{" "}
+            <a className="underline" href={glossaryHref}>
+              ingredient glossary
+            </a>
           </p>
         </div>
       )}

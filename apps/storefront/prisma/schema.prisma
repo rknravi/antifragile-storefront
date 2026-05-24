@@ -33,3 +33,15 @@ model Review {
 
   @@index([productSlug])
 }
+
+/** Points earned per order (one row per sourceOrderId). */
+model LoyaltyLedger {
+  id            String   @id @default(cuid())
+  email         String
+  sourceOrderId String   @unique
+  points        Int
+  orderTotal    Int
+  createdAt     DateTime @default(now())
+
+  @@index([email])
+}

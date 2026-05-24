@@ -1,4 +1,5 @@
 import type { Product } from "./product-types";
+import { computeCartBundles } from "./bundle-cart";
 import { computeOrderTotals } from "./pricing";
 
 export type CheckoutItemInput = { slug: string; quantity: number };
@@ -30,6 +31,14 @@ export function resolveCheckoutFromCatalog(
   }
   if (!lines.length) throw new Error("Cart is empty.");
   const priced = lines.map((l) => ({ salePrice: l.product.salePrice, quantity: l.quantity }));
-  const { subtotal, discount, estimatedTax, shippingEstimate, total } = computeOrderTotals(priced, coupon);
+  const { totalSavings } = computeCartBundles(
+    catalog,
+    lines.map((l) => ({ slug: l.product.slug, quantity: l.quantity }))
+  );
+  const { subtotal, discount, estimatedTax, shippingEstimate, total } = computeOrderTotals(
+    priced,
+    coupon,
+    totalSavings
+  );
   return { lines, subtotal, discount, estimatedTax, shippingEstimate, total };
 }

@@ -1,8 +1,7 @@
 # Local PostgreSQL for Prisma orders/reviews (optional — use Neon/RDS URL in DATABASE_URL instead)
 services:
-  postgres:
-    image: postgres:16
-    container_name: antifragile-postgres
+  db:
+    image: postgres:16-alpine
     restart: unless-stopped
     environment:
       POSTGRES_USER: antifragile
@@ -11,7 +10,7 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - antifragile_postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
 
 volumes:
-  antifragile_postgres_data:
+  pgdata:

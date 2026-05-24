@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { awardPointsForOrder } from "@/lib/loyalty";
 import { sendOrderConfirmationEmail } from "@/lib/send-order-email";
 import { validateCheckoutFields } from "@/lib/checkout-validation";
 
@@ -129,6 +130,18 @@ export async function POST(req: Request) {
   }
 
   const email = String(cust.email).trim().toLowerCase();
+
+  let pointsAwarded = 0;
+  let pointsBalance = 0;
+  if (persisted && email) {
+    const loyalty = await awardPointsForOrder({
+      email,
+      sourceOrderId,
+      orderTotal: totals.total,
+    });
+    pointsAwarded = loyalty.awarded;
+    pointsBalance = loyalty.balance;
+  }
   const emailResult = await sendOrderConfirmationEmail({
     sourceOrderId,
     gateway: body.gateway,
@@ -146,5 +159,7 @@ export async function POST(req: Request) {
     emailSent: emailResult.ok,
     emailSkipped: emailResult.skipped === true,
     emailError: emailResult.ok ? undefined : emailResult.error,
+    pointsAwarded,
+    pointsBalance,
   });
 }
