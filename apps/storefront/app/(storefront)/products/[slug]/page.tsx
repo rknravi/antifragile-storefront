@@ -7,12 +7,10 @@ import { ProductInfoPanel } from "@/components/pdp/ProductInfoPanel";
 import { ProductVideo } from "@/components/pdp/ProductVideo";
 import { BeforeAfterSlider } from "@/components/pdp/BeforeAfterSlider";
 import { RecordRecentlyViewed } from "@/components/pdp/RecordRecentlyViewed";
-import { PromoOfferBar } from "@/components/pdp/PromoOfferBar";
 import { FaqMini } from "@/app/products/[slug]/FaqMini";
 import { ProductReviews } from "@/app/products/[slug]/ProductReviews";
 import { getProductBySlug, getRelatedProducts } from "@/lib/products";
 import { getActiveProducts } from "@/lib/get-catalog";
-import { getProductPalette } from "@/lib/product-palette";
 import { raysPath } from "@/lib/theme-paths";
 
 export async function generateStaticParams() {
@@ -51,11 +49,9 @@ export default async function RaysProductPage({ params }: { params: Promise<{ sl
   if (!product) notFound();
 
   const related = getRelatedProducts(catalog, product.slug);
-  const palette = getProductPalette(product);
 
   return (
     <div className="bg-rays-white pb-24 md:pb-12">
-      <PromoOfferBar accent={palette.primary} />
       <RecordRecentlyViewed slug={slug} />
       <div className="mx-auto max-w-[1440px] px-4 pt-6 md:px-8">
         <Breadcrumbs
