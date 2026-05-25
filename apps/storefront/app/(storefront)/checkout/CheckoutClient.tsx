@@ -11,15 +11,21 @@ import { themeNavPaths } from "@/lib/theme-nav-paths";
 import { readAccountSession, writeAccountSession } from "@/lib/account-session";
 import {
   getCheckoutFieldErrors,
+  validateEmail,
   type CheckoutFieldKey,
   type CheckoutFields,
 } from "@/lib/checkout-validation";
 import {
   applyCheckoutPrefill,
   buildCheckoutPrefill,
+  buildGuestCheckoutPrefill,
+  defaultSavedAddress,
+  listCheckoutSavedAddresses,
+  shippingFieldsFromSaved,
   type CheckoutPrefillFields,
 } from "@/lib/checkout-prefill";
-import type { SavedAddress } from "@/lib/shipping-address";
+import { addressKey, type SavedAddress } from "@/lib/shipping-address";
+import { CheckoutSavedAddressSelect } from "@/components/commerce/CheckoutSavedAddressSelect";
 import { CouponField } from "@/components/commerce/CouponField";
 import { OrderTotalsBreakdown } from "@/components/commerce/OrderTotalsBreakdown";
 import { recordBrowserLoyalty } from "@/lib/loyalty-browser";
@@ -113,8 +119,11 @@ export default function CheckoutClient({ checkoutFlags }: { checkoutFlags: Check
 
   const [gateway, setGateway] = useState<Gateway>(defaultGateway);
   const [step, setStep] = useState<"details" | "review">("details");
-  const [prefillSource, setPrefillSource] = useState<"account" | null>(null);
+  const [prefillSource, setPrefillSource] = useState<"account" | "orders" | null>(null);
+  const [savedAddresses, setSavedAddresses] = useState<SavedAddress[]>([]);
+  const [selectedAddressKey, setSelectedAddressKey] = useState("");
   const prefillStartedRef = useRef(false);
+  const lastPrefillEmailRef = useRef<string | null>(null);
 
   useEffect(() => {
     setGateway(defaultGateway);
@@ -124,63 +133,125 @@ export default function CheckoutClient({ checkoutFlags }: { checkoutFlags: Check
     setHasAccountSession(Boolean(readAccountSession()));
   }, []);
 
-  useEffect(() => {
-    if (prefillStartedRef.current) return;
-    const session = readAccountSession();
-    if (!session) return;
-    prefillStartedRef.current = true;
+  const applyPrefillToForm = useCallback((prefill: CheckoutPrefillFields, source: "account" | "orders") => {
+    const snapshot = (): CheckoutPrefillFields => ({
+      name,
+      email,
+      mobile,
+      address,
+      city,
+      pin,
+      gstNumber,
+    });
+    const next = applyCheckoutPrefill(snapshot(), prefill);
+    setName(next.name);
+    setEmail(next.email);
+    setMobile(next.mobile);
+    setAddress(next.address);
+    setCity(next.city);
+    setPin(next.pin);
+    setGstNumber(next.gstNumber);
+    const filled =
+      next.email || next.name || next.mobile || next.address || next.city || next.pin;
+    if (filled) setPrefillSource(source);
+  }, [name, email, mobile, address, city, pin, gstNumber]);
 
-    const apply = (prefill: CheckoutPrefillFields) => {
-      const snapshot = (): CheckoutPrefillFields => ({
-        name,
-        email,
-        mobile,
-        address,
-        city,
-        pin,
-        gstNumber,
-      });
-      const next = applyCheckoutPrefill(snapshot(), prefill);
-      setName(next.name);
-      setEmail(next.email);
-      setMobile(next.mobile);
-      setAddress(next.address);
-      setCity(next.city);
-      setPin(next.pin);
-      setGstNumber(next.gstNumber);
-      const filled =
-        next.email || next.name || next.mobile || next.address || next.city || next.pin;
-      if (filled) setPrefillSource("account");
-    };
+  const fetchCheckoutPrefill = useCallback(
+    async (targetEmail: string) => {
+      const normalized = targetEmail.trim().toLowerCase();
+      if (!normalized || validateEmail(normalized)) return;
+      if (lastPrefillEmailRef.current === normalized) return;
+      lastPrefillEmailRef.current = normalized;
 
-    apply(buildCheckoutPrefill({ session, addresses: [] }));
+      const session = readAccountSession();
+      const matchesSession =
+        session !== null && session.email.trim().toLowerCase() === normalized;
 
-    void (async () => {
+      if (matchesSession && session) {
+        applyPrefillToForm(buildCheckoutPrefill({ session, addresses: [] }), "account");
+      }
+
       try {
         const r = await fetch("/api/account/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: session.email.trim().toLowerCase() }),
+          body: JSON.stringify({ email: normalized }),
         });
         const j = (await r.json()) as {
           addresses?: SavedAddress[];
           lastCustomer?: { name?: string; mobile?: string } | null;
         };
         if (!r.ok) return;
-        apply(
-          buildCheckoutPrefill({
-            session,
-            addresses: j.addresses ?? [],
-            lastCustomer: j.lastCustomer ?? null,
-          })
-        );
+
+        const merged = listCheckoutSavedAddresses(normalized, j.addresses ?? []);
+        setSavedAddresses(merged);
+
+        const prefill =
+          matchesSession && session
+            ? buildCheckoutPrefill({
+                session,
+                addresses: j.addresses ?? [],
+                lastCustomer: j.lastCustomer ?? null,
+              })
+            : buildGuestCheckoutPrefill(
+                normalized,
+                j.addresses ?? [],
+                j.lastCustomer ?? null
+              );
+
+        applyPrefillToForm(prefill, matchesSession ? "account" : "orders");
+
+        const defaultAddr = defaultSavedAddress(normalized, j.addresses ?? []);
+        if (defaultAddr) {
+          const key = addressKey(defaultAddr);
+          setSelectedAddressKey(merged.some((a) => addressKey(a) === key) ? key : "");
+        }
       } catch {
-        /* Profile-only prefill already applied */
+        /* Profile-only or browser snapshot prefill may already be applied */
       }
-    })();
-    // Run once on mount; field state intentionally excluded.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    },
+    [applyPrefillToForm]
+  );
+
+  const applySavedAddressSelection = useCallback(
+    (key: string) => {
+      setSelectedAddressKey(key);
+      if (!key) return;
+      const addr = savedAddresses.find((a) => addressKey(a) === key);
+      if (!addr) return;
+      const ship = shippingFieldsFromSaved(addr);
+      setAddress(ship.address);
+      setCity(ship.city);
+      setPin(ship.pin);
+      setGstNumber(ship.gstNumber);
+      setFieldErrors((prev) => {
+        const next = { ...prev };
+        delete next.address;
+        delete next.city;
+        delete next.pin;
+        delete next.gstNumber;
+        return next;
+      });
+    },
+    [savedAddresses]
+  );
+
+  useEffect(() => {
+    if (prefillStartedRef.current) return;
+    const session = readAccountSession();
+    if (!session) return;
+    prefillStartedRef.current = true;
+    void fetchCheckoutPrefill(session.email);
+  }, [fetchCheckoutPrefill]);
+
+  const handleEmailBlur = useCallback(() => {
+    const normalized = email.trim().toLowerCase();
+    if (!normalized || validateEmail(normalized)) return;
+    const session = readAccountSession();
+    if (session && session.email.trim().toLowerCase() === normalized) return;
+    lastPrefillEmailRef.current = null;
+    void fetchCheckoutPrefill(normalized);
+  }, [email, fetchCheckoutPrefill]);
 
   const finalizeOrder = useCallback(
     async (opts: {
@@ -656,7 +727,11 @@ export default function CheckoutClient({ checkoutFlags }: { checkoutFlags: Check
                   onChange={(e) => {
                     setEmail(e.target.value);
                     clearFieldError("email");
+                    if (lastPrefillEmailRef.current && e.target.value.trim().toLowerCase() !== lastPrefillEmailRef.current) {
+                      lastPrefillEmailRef.current = null;
+                    }
                   }}
+                  onBlur={handleEmailBlur}
                   autoComplete="email"
                   maxLength={254}
                   aria-invalid={Boolean(fieldErrors.email)}
@@ -680,7 +755,20 @@ export default function CheckoutClient({ checkoutFlags }: { checkoutFlags: Check
 
             <section className="mt-8">
               <h2 className="text-sm font-semibold text-neutral-900">Shipping address</h2>
+              {prefillSource ? (
+                <p className="mt-1 text-xs text-neutral-500">
+                  {prefillSource === "account"
+                    ? "Filled from your account and past orders where fields were empty."
+                    : "Filled from past orders for this email where fields were empty."}
+                </p>
+              ) : null}
               <div className="mt-3 space-y-3">
+                <CheckoutSavedAddressSelect
+                  addresses={savedAddresses}
+                  value={selectedAddressKey}
+                  onChange={applySavedAddressSelection}
+                  inputClassName={fieldClass()}
+                />
                 <div>
                   <label className="text-sm text-neutral-700">Country / region</label>
                   <select className={fieldClass()} defaultValue="IN" aria-label="Country">
@@ -944,7 +1032,12 @@ export default function CheckoutClient({ checkoutFlags }: { checkoutFlags: Check
           <CheckoutSummaryLines theme={rays ? "rays" : "classic"} />
           <CouponField variant={rays ? "rays" : "classic"} layout="sidebar" />
           <CheckoutSidebarTotals variant={rays ? "rays" : "classic"} />
-          <FreeShippingProgress variant={rays ? "rays" : "classic"} shopHref={nav.shop} align="left" />
+          <FreeShippingProgress
+            variant={rays ? "rays" : "classic"}
+            shopHref={nav.shop}
+            align="left"
+            hideWhenQualified
+          />
           <CheckoutUpsell theme={rays ? "rays" : "classic"} />
         </div>
       </aside>

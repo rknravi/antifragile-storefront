@@ -18,11 +18,28 @@ export type RoutineBundleMeta = {
   id: RoutineBundleId;
   title: string;
   subtitle: string;
+  /** Primary bundle artwork (lifestyle / lineup). */
   imageSrc: string;
+  /** Extra angles for bundle page gallery. */
+  gallery?: string[];
   categories: Array<"Cleanser" | "Serum" | "Moisturizer">;
   /** Promotional bundle total (INR). */
   bundlePrice: number;
 };
+
+/** Deduped hero + gallery paths for bundle cards and /shop?bundle=1. */
+export function bundleGalleryImages(meta: RoutineBundleMeta): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  const push = (src?: string) => {
+    if (!src || seen.has(src)) return;
+    seen.add(src);
+    out.push(src);
+  };
+  push(meta.imageSrc);
+  meta.gallery?.forEach(push);
+  return out;
+}
 
 export type RoutineBundlePricing = {
   items: Product[];
@@ -31,12 +48,52 @@ export type RoutineBundlePricing = {
   savings: number;
 };
 
+const HERO = "/images/hero";
+
+/** Model heroes — filenames match product pair (cleanser-moisturizer = Cleanse & seal, etc.). */
+export const BUNDLE_HERO = {
+  cleanseSeal: `${HERO}/antifragile-hero-cleanser-moisturizer.png`,
+  cleanseTreat: `${HERO}/antifragile-hero-cleanser-serum.png`,
+  treatSeal: `${HERO}/antifragile-hero-serum-moisturizer.png`,
+  fullRitual: `${HERO}/antifragile-hero-cleanser-moisturizer-serum.png`,
+} as const;
+
+/** Hero + lifestyle gallery per bundle id slug (paths under `public/images/`). */
+const BUNDLE_ART: Record<
+  Exclude<RoutineBundleId, "full-ritual-bundle">,
+  { hero: string; gallery: string[] }
+> = {
+  "cleanse-seal-bundle": {
+    hero: BUNDLE_HERO.cleanseSeal,
+    gallery: [
+      "/images/antifragile-cleanse-seal-bundle-lifestyle-01.png",
+      "/images/antifragile-cleanse-seal-bundle-lifestyle-03.png",
+      "/images/antifragile-cleanse-seal-bundle-lifestyle-04.png",
+    ],
+  },
+  "cleanse-treat-bundle": {
+    hero: BUNDLE_HERO.cleanseTreat,
+    gallery: [
+      "/images/antifragile-cleanse-treat-bundle-lifestyle-01.png",
+      "/images/antifragile-cleanse-treat-bundle-lifestyle-03.png",
+    ],
+  },
+  "treat-seal-bundle": {
+    hero: BUNDLE_HERO.treatSeal,
+    gallery: [
+      "/images/antifragile-treat-seal-bundle-lifestyle-01.png",
+      "/images/antifragile-treat-seal-bundle-lifestyle-03.png",
+    ],
+  },
+};
+
 export const ROUTINE_BUNDLES: RoutineBundleMeta[] = [
   {
     id: "cleanse-seal-bundle",
     title: "Cleanse & seal bundle",
     subtitle: "Morning essentials — Soft Refresh cleanser + Airy Whip moisturizer.",
-    imageSrc: "/images/antifragile-cleanse-seal-bundle.png",
+    imageSrc: BUNDLE_ART["cleanse-seal-bundle"].hero,
+    gallery: [...BUNDLE_ART["cleanse-seal-bundle"].gallery],
     categories: ["Cleanser", "Moisturizer"],
     bundlePrice: 1800,
   },
@@ -44,7 +101,8 @@ export const ROUTINE_BUNDLES: RoutineBundleMeta[] = [
     id: "cleanse-treat-bundle",
     title: "Cleanse & treat bundle",
     subtitle: "Evening reset — cleanse, then Pre-Shift renewal serum.",
-    imageSrc: "/images/antifragile-cleanse-treat-bundle.png",
+    imageSrc: BUNDLE_ART["cleanse-treat-bundle"].hero,
+    gallery: [...BUNDLE_ART["cleanse-treat-bundle"].gallery],
     categories: ["Cleanser", "Serum"],
     bundlePrice: 2000,
   },
@@ -52,7 +110,8 @@ export const ROUTINE_BUNDLES: RoutineBundleMeta[] = [
     id: "treat-seal-bundle",
     title: "Treat & seal bundle",
     subtitle: "Pre-Shift serum + Airy Whip moisturizer to lock in hydration.",
-    imageSrc: "/bundles/treat-seal-bundle.svg",
+    imageSrc: BUNDLE_ART["treat-seal-bundle"].hero,
+    gallery: [...BUNDLE_ART["treat-seal-bundle"].gallery],
     categories: ["Serum", "Moisturizer"],
     bundlePrice: 2425,
   },
@@ -60,7 +119,12 @@ export const ROUTINE_BUNDLES: RoutineBundleMeta[] = [
     id: "full-ritual-bundle",
     title: "Full ritual bundle",
     subtitle: "Complete resilience trio — cleanse, treat, and seal.",
-    imageSrc: "/images/antifragile-full-ritual-bundle.png",
+    imageSrc: BUNDLE_HERO.fullRitual,
+    gallery: [
+      "/images/antifragile-full-ritual-bundle-lifestyle-02.png",
+      "/images/antifragile-full-ritual-bundle-lifestyle-03.png",
+      "/images/antifragile-full-ritual-bundle-lineup-02.png",
+    ],
     categories: ["Cleanser", "Serum", "Moisturizer"],
     bundlePrice: 3100,
   },

@@ -29,3 +29,8 @@ export function getFreeShippingProgress(
     isEmpty,
   };
 }
+
+/** Cart/checkout promo strip (progress + upsells) — hide once FREE shipping applies. */
+export function showShippingPromoStrip(state: FreeShippingProgress): boolean {
+  return state.isEmpty || !state.qualified;
+}

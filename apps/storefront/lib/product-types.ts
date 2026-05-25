@@ -16,6 +16,8 @@ export type Product = {
   /** Product usage / how-to video URL (mp4 or embed) */
   videoUrl?: string;
   videoPoster?: string;
+  /** Application stills until brand video is uploaded */
+  howToImages?: string[];
   /** Before/after comparison slider */
   beforeAfter?: { before: string; after: string; label?: string };
   /** Show low-stock urgency below this count */

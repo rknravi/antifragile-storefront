@@ -4,13 +4,14 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RaysProductCard } from "@/components/rays/RaysProductCard";
 import { ProductGallery } from "@/components/pdp/ProductGallery";
 import { ProductInfoPanel } from "@/components/pdp/ProductInfoPanel";
-import { ProductVideo } from "@/components/pdp/ProductVideo";
+import { ProductHowToSection } from "@/components/pdp/ProductHowToSection";
 import { BeforeAfterSlider } from "@/components/pdp/BeforeAfterSlider";
 import { RecordRecentlyViewed } from "@/components/pdp/RecordRecentlyViewed";
 import { FaqMini } from "@/app/products/[slug]/FaqMini";
 import { ProductReviews } from "@/app/products/[slug]/ProductReviews";
 import { getProductBySlug, getRelatedProducts } from "@/lib/products";
 import { getActiveProducts } from "@/lib/get-catalog";
+import { productHasHowToSection, productHowToImages } from "@/lib/product-howto";
 import { raysPath } from "@/lib/theme-paths";
 
 export async function generateStaticParams() {
@@ -63,14 +64,19 @@ export default async function RaysProductPage({ params }: { params: Promise<{ sl
           ]}
         />
       </div>
-      <div className="mx-auto grid max-w-[1440px] gap-10 px-4 py-10 md:grid-cols-2 md:gap-14 md:px-8 md:py-14">
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-4 py-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:items-start md:gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(0,0.72fr)] lg:gap-14 md:px-8 md:py-14">
         <ProductGallery product={product} variant="rays" />
         <ProductInfoPanel product={product} variant="rays" theme="rays" />
       </div>
 
-      {product.videoUrl && (
+      {productHasHowToSection(product) && (
         <div className="mx-auto max-w-[1440px] px-4 md:px-8">
-          <ProductVideo url={product.videoUrl} poster={product.videoPoster} title={product.name} />
+          <ProductHowToSection
+            title={product.name}
+            images={productHowToImages(product)}
+            videoUrl={product.videoUrl}
+            videoPoster={product.videoPoster}
+          />
         </div>
       )}
 

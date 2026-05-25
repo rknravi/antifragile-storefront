@@ -29,7 +29,7 @@ export async function GET(req: Request) {
     const summary = computeReviewSummary(reviews.map((r) => r.rating));
     return NextResponse.json({ reviews, summary });
   } catch {
-    return NextResponse.json({ error: "Could not load reviews." }, { status: 500 });
+    return NextResponse.json({ reviews: [], summary: null });
   }
 }
 

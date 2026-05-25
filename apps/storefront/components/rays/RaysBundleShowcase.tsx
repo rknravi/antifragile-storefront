@@ -3,8 +3,8 @@
 import Link from "next/link";
 import type { Product } from "@/lib/product-types";
 import { Money } from "@/components/Money";
-import { RoutineBundleImage } from "@/components/commerce/RoutineBundleImage";
-import { ROUTINE_BUNDLES, getBundlePricing, type RoutineBundleId } from "@/lib/routine-bundles";
+import { BundleShowcaseMedia } from "@/components/commerce/BundleShowcaseMedia";
+import { ROUTINE_BUNDLES, bundleGalleryImages, getBundlePricing, type RoutineBundleId } from "@/lib/routine-bundles";
 import { raysPath } from "@/lib/theme-paths";
 import { themeProductPath } from "@/lib/theme-nav-paths";
 import { ShareLinkBar } from "@/components/commerce/ShareLinkBar";
@@ -29,9 +29,9 @@ export function RaysBundleShowcase({
             key={bundle.id}
             className="flex flex-col overflow-hidden rounded-3xl border-2 border-rays-black bg-rays-white shadow-[6px_6px_0_#0A0A0A]"
           >
-            <RoutineBundleImage
-              products={items}
-              fallbackSrc={bundle.imageSrc}
+            <BundleShowcaseMedia
+              images={bundleGalleryImages(bundle)}
+              alt={bundle.title}
               size="lg"
               className="rounded-none border-b-2 border-rays-black"
             />

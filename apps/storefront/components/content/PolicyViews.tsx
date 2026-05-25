@@ -50,13 +50,20 @@ const INGREDIENT_ENTRIES = [
   { term: "Humectants", def: "Ingredients that attract water into the upper layers of skin to support hydration." },
   { term: "Emollients", def: "Skin-softening ingredients that help reduce roughness and support comfort." },
   { term: "Surfactants", def: "Cleansing agents that lift oil and debris; mild variants prioritize barrier kindness." },
+  { term: "Ceramide-supporting esters", def: "Lipid-related ingredients formulated to reinforce the moisture barrier without a heavy feel." },
+  { term: "Renewal-focused actives", def: "Evening-oriented ingredients chosen for texture and tone support; introduce gradually and use daytime SPF." },
+  { term: "Buffered vehicle", def: "The serum base that helps distribute actives while moderating irritation risk for sensitive users." },
 ];
 
 export function IngredientsPageView({ variant = "classic" }: { variant?: StoreTheme }) {
   const rays = variant === "rays";
+  const nav = themeNavPaths(variant);
   return (
     <ThemedContentPage variant={variant} title="Ingredient glossary">
-      <p>Plain-language anchors—expand with CMS in production.</p>
+      <p>
+        Plain-language anchors for our formulas. Full INCI lists live on each product page; deeper context in the{" "}
+        <ThemedInlineLink href={nav.blog}>Skin Journal</ThemedInlineLink>.
+      </p>
       <dl className="mt-10 space-y-4">
         {INGREDIENT_ENTRIES.map((e) => (
           <div

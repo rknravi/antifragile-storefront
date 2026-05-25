@@ -2,21 +2,46 @@
   {
     "slug": "why-barrier-care-matters",
     "title": "Why barrier care matters in humid climates",
-    "excerpt": "Hydration is not heaviness—how to layer without suffocating skin.",
-    "date": "2026-05-01",
+    "excerpt": "Humectants, emollients, and how Airy Whip supports the barrier without heaviness in heat.",
+    "date": "2026-05-08",
     "body": [
-      "Barrier-friendly routines prioritize comfort first. Start with a gentle cleanser, add targeted treatment at night, and seal with a moisturizer that feels wearable in heat.",
-      "Introduce actives slowly—two to three nights per week—then scale as tolerance builds."
+      "Barrier-friendly routines prioritize comfort first. In humid weather that often means a gentle cleanse, a light treatment at night, and a seal that does not trap sweat.",
+      "Healthy-looking skin depends on a flexible stratum corneum—corneocytes in a lipid-rich matrix that limits water loss. When that matrix is stressed by harsh cleansing or over-exfoliation, skin can feel tight, look dull, or react more easily.",
+      "Humectants attract water into the upper layers of skin; emollients soften and smooth the surface. Airy Whip Silk Cream Moisturizer pairs humectants with emollients and ceramide-supporting esters so hydration and barrier lipids work together. The finish is meant to seal, not suffocate—wearable under SPF or over evening treatment.",
+      "Introduce actives slowly—two to three nights per week—then scale as tolerance builds. This is educational context, not medical advice; see the full INCI on the product page and our ingredient glossary."
+    ]
+  },
+  {
+    "slug": "gentle-cleanser-basics",
+    "title": "Gentle cleanser basics and the science of rinse-off care",
+    "excerpt": "Micelles, mild surfactants, and daily habits that prepare skin for serum and moisturizer.",
+    "date": "2026-05-05",
+    "body": [
+      "Cleansing should remove sunscreen, sweat, and buildup without leaving skin tight. Use lukewarm water, massage gel cleanser for thirty to sixty seconds, then rinse fully.",
+      "Surfactants have a water-loving head and an oil-loving tail. In gel cleansers they form micelles that trap sebum and grime so water can rinse them away. Aggressive surfactants strip too much lipid; Soft Refresh Gel Cleanser uses a gentle surfactant blend plus skin-conditioning agents so the after-feel stays comfortable.",
+      "If skin feels stripped, reduce frequency or follow with moisturizer. Avoid unnecessary double-cleansing; barrier recovery at night works better when morning wash is not undoing it. Patch test new routines and read the INCI on the product page."
+    ]
+  },
+  {
+    "slug": "renewal-serum-at-night",
+    "title": "Renewal serum at night: use, science, and what to expect",
+    "excerpt": "Buffered delivery, evening actives, and why moisturizer and morning SPF still matter.",
+    "date": "2026-04-30",
+    "body": [
+      "Night serums work best on clean, dry skin before moisturizer. Start two or three evenings per week, then build as tolerance allows.",
+      "Overnight, transepidermal water loss can rise—one reason targeted treatments and a seal are often scheduled PM. Pre-Shift Renewal Serum uses renewal-focused actives in a buffered vehicle to spread actives while moderating irritation risk, with soothing botanicals and stabilizers for consistent feel bottle to bottle.",
+      "Serum treats; moisturizer seals. Skipping seal can increase dryness and irritation. Use morning SPF when your evening routine includes renewal-oriented products. Outcomes vary; patch test and pause if irritation persists."
     ]
   },
   {
     "slug": "morning-vs-night-routine",
     "title": "Morning vs night: what actually changes",
-    "excerpt": "SPF by day, renewal by night—simple guardrails for beginners.",
+    "excerpt": "SPF by day, renewal by night—simple guardrails for the full cleanse · treat · seal ritual.",
     "date": "2026-04-18",
     "body": [
       "Morning is about protection and prep: cleanse, hydrate, then SPF.",
-      "Night is for renewal: cleanse, serum (as directed), then moisturizer."
+      "Night is for renewal: cleanse, serum (as directed), then moisturizer.",
+      "The shift is not more products—it is the right product at the right time. Cleanse removes what the day or night left behind; treat addresses tone and texture when skin is in repair mode; seal locks in comfort so actives and hydration stay effective."
     ]
   }
 ]

@@ -1,33 +1,30 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { BlogPost } from "@/lib/content-types";
-import { blogPostImage } from "@/lib/blog-images";
+import { blogPostImage, blogPostImageAlt } from "@/lib/blog-images";
+import { EditorialImage } from "@/components/rays/EditorialImage";
 
 export function RaysBlogGrid({ posts }: { posts: BlogPost[] }) {
+  if (posts.length === 0) return null;
+
   return (
-    <section className="bg-rays-white py-16 md:py-24">
+    <section className="bg-rays-white py-14 md:py-20">
       <div className="mx-auto max-w-[1440px] px-4 md:px-8">
-        <h2 className="text-center font-rays text-3xl font-extrabold uppercase text-rays-accent md:text-5xl">
-          All posts
-        </h2>
-        <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <h2 className="font-rays text-2xl font-extrabold uppercase text-rays-accent md:text-3xl">More articles</h2>
+        <ul className="mt-10 grid gap-10 sm:grid-cols-2 lg:max-w-4xl">
           {posts.map((p) => (
             <li key={p.slug}>
               <Link href={`/blog/${p.slug}`} className="group block">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-rays-cream">
-                  <Image
-                    src={blogPostImage(p)}
-                    alt=""
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(max-width:768px) 100vw, 33vw"
-                  />
-                </div>
+                <EditorialImage
+                  src={blogPostImage(p)}
+                  alt={blogPostImageAlt(p)}
+                  aspect="aspect-[5/4]"
+                  className="transition duration-300 group-hover:border-rays-accent/40"
+                />
                 <p className="mt-4 text-xs text-rays-gray">{p.date}</p>
-                <h3 className="mt-2 font-rays text-lg font-bold uppercase leading-snug text-rays-accent group-hover:underline">
+                <h3 className="mt-2 font-rays text-lg font-bold uppercase leading-snug text-rays-black group-hover:text-rays-accent">
                   {p.title}
                 </h3>
-                <p className="mt-2 line-clamp-2 text-sm text-rays-gray">{p.excerpt}</p>
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-rays-gray">{p.excerpt}</p>
               </Link>
             </li>
           ))}

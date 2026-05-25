@@ -43,17 +43,16 @@ export type SocialPlatformMeta = {
   external?: boolean;
 };
 
+/**
+ * Consumer skincare (India-first): high-intent shares only.
+ * Removed LinkedIn, X, Pinterest, Telegram, Reddit — low use for product/bundle links.
+ */
 export const SOCIAL_PLATFORMS: SocialPlatformMeta[] = [
-  { id: "facebook", label: "Facebook", external: true },
-  { id: "twitter", label: "X (Twitter)", external: true },
   { id: "whatsapp", label: "WhatsApp", external: true },
-  { id: "instagram", label: "Instagram" },
-  { id: "linkedin", label: "LinkedIn", external: true },
-  { id: "pinterest", label: "Pinterest", external: true },
-  { id: "telegram", label: "Telegram", external: true },
-  { id: "reddit", label: "Reddit", external: true },
-  { id: "email", label: "Email" },
   { id: "copy", label: "Copy link" },
+  { id: "facebook", label: "Facebook", external: true },
+  { id: "instagram", label: "Instagram" },
+  { id: "email", label: "Email" },
   { id: "native", label: "More options" },
 ];
 

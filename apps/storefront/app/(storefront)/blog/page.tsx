@@ -10,12 +10,13 @@ export const metadata = {
 
 export default async function RaysBlogPage() {
   const posts = await getBlogPosts();
+  const morePosts = posts.length > 1 ? posts.slice(1) : [];
 
   return (
     <div className="bg-rays-white">
       <RaysPageBreadcrumbs trail={[{ label: "Blog" }]} />
       <RaysBlogFeatured posts={posts} />
-      <RaysBlogGrid posts={posts} />
+      <RaysBlogGrid posts={morePosts} />
     </div>
   );
 }

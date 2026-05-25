@@ -12,8 +12,7 @@ import { ProductImage } from "@/components/ProductImage";
 import { productPrimaryImageSrc } from "@/lib/product-images";
 import { ProductShareBar } from "@/components/commerce/ProductShareBar";
 import { ShareLinkBar } from "@/components/commerce/ShareLinkBar";
-import { FreeShippingProgress } from "@/components/commerce/FreeShippingProgress";
-import { CartUpsellSuggestions } from "@/components/commerce/CartUpsellSuggestions";
+import { CartShippingPromoStrip } from "@/components/commerce/CartShippingPromoStrip";
 
 export function CartDrawer() {
   const pathname = usePathname();
@@ -64,20 +63,12 @@ export function CartDrawer() {
           </button>
         </div>
 
-        <div
-          className={`border-b px-5 py-5 ${
-            rays ? "border-rays-line bg-rays-accent text-rays-white" : "border-black/5 bg-neutral-50/80"
-          }`}
-        >
-          <FreeShippingProgress
-            variant={rays ? "rays" : "classic"}
-            shopHref={shopHref}
-            onShopClick={closeCart}
-            align="left"
-            onAccentBackground={rays}
-          />
-          <CartUpsellSuggestions theme={rays ? "rays" : "classic"} layout="drawer" />
-        </div>
+        <CartShippingPromoStrip
+          variant={rays ? "rays" : "classic"}
+          shopHref={shopHref}
+          onShopClick={closeCart}
+          surface="drawer"
+        />
 
         <div className="flex-1 overflow-y-auto px-5 py-4">
           {lines.length === 0 ? (

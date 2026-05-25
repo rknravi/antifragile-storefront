@@ -62,6 +62,16 @@ export function extractAddressesFromOrderRows(rows: OrderRow[]): SavedAddress[] 
   return out;
 }
 
+/** Short label for a saved-address dropdown (city + PIN; not full street). */
+export function formatSavedAddressLabel(addr: Pick<ShippingAddress, "address" | "city" | "pin">): string {
+  const city = addr.city.trim();
+  const pin = addr.pin.replace(/\s/g, "");
+  const street = addr.address.trim();
+  const short =
+    street.length > 42 ? `${street.slice(0, 39).trimEnd()}…` : street;
+  return [short, city, pin].filter(Boolean).join(" · ");
+}
+
 export function mergeSavedAddresses(api: SavedAddress[], extra: SavedAddress | null): SavedAddress[] {
   if (!extra?.address) return api;
   if (api.some((a) => addressKey(a) === addressKey(extra))) return api;

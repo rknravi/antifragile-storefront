@@ -14,6 +14,8 @@ type Props = {
   align?: "center" | "left";
   /** White text + light bar on orange announcement/cart header */
   onAccentBackground?: boolean;
+  /** When true, render nothing once free shipping applies (totals still show FREE). */
+  hideWhenQualified?: boolean;
 };
 
 export function FreeShippingProgress({
@@ -23,6 +25,7 @@ export function FreeShippingProgress({
   className = "",
   align = "center",
   onAccentBackground = false,
+  hideWhenQualified = false,
 }: Props) {
   const { lines, subtotal, discount } = useCart();
   const rays = variant === "rays";
@@ -34,6 +37,8 @@ export function FreeShippingProgress({
     () => getFreeShippingProgress(qualifyingTotal, isEmpty),
     [qualifyingTotal, isEmpty]
   );
+
+  if (hideWhenQualified && !isEmpty && state.qualified) return null;
 
   const barTrack = onAccentBackground
     ? "border-rays-white/40 bg-rays-white/20"

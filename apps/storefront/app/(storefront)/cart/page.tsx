@@ -12,8 +12,7 @@ import { getThemeFromPath } from "@/lib/theme-paths";
 import { themeNavPaths, themeProductPath } from "@/lib/theme-nav-paths";
 import { ProductShareBar } from "@/components/commerce/ProductShareBar";
 import { ShareLinkBar } from "@/components/commerce/ShareLinkBar";
-import { FreeShippingProgress } from "@/components/commerce/FreeShippingProgress";
-import { CartUpsellSuggestions } from "@/components/commerce/CartUpsellSuggestions";
+import { CartShippingPromoStrip } from "@/components/commerce/CartShippingPromoStrip";
 
 export default function CartPage() {
   const pathname = usePathname();
@@ -34,14 +33,7 @@ export default function CartPage() {
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
       <h1 className="font-display text-4xl text-neutral-900">Cart</h1>
 
-      <div
-        className={`mt-8 rounded-2xl border px-6 py-8 ${
-          rays ? "border-rays-line bg-rays-white" : "border-black/5 bg-neutral-50"
-        }`}
-      >
-        <FreeShippingProgress variant={rays ? "rays" : "classic"} shopHref={nav.shop} align="left" />
-        <CartUpsellSuggestions theme={rays ? "rays" : "classic"} layout="drawer" />
-      </div>
+      <CartShippingPromoStrip variant={rays ? "rays" : "classic"} shopHref={nav.shop} surface="page" />
 
       {lines.length === 0 ? (
         <p className="mt-6 text-neutral-600">

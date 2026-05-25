@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import type { BlogPost } from "@/lib/content-types";
-import { blogPostImage } from "@/lib/blog-images";
+import { blogPostImage, blogPostImageAlt } from "@/lib/blog-images";
+import { EditorialImage } from "@/components/rays/EditorialImage";
 import { raysPath } from "@/lib/theme-paths";
 
 export function RaysBlogFeatured({ posts }: { posts: BlogPost[] }) {
@@ -13,64 +13,79 @@ export function RaysBlogFeatured({ posts }: { posts: BlogPost[] }) {
   if (!post) return null;
 
   const img = blogPostImage(post);
+  const alt = blogPostImageAlt(post);
 
   return (
-    <section className="mx-auto max-w-[1440px] px-4 py-16 md:px-8 md:py-24">
-      <h2 className="text-center font-rays text-3xl font-extrabold uppercase text-rays-accent md:text-4xl">
-        Featured posts
-      </h2>
-      <div className="relative mt-10 overflow-hidden rounded-3xl bg-rays-accent p-6 md:p-10">
-        <span className="absolute right-6 top-6 text-sm font-bold text-rays-white/80 md:right-10 md:top-10">
-          {idx + 1}/{posts.length}
-        </span>
-        <div className="grid gap-8 md:grid-cols-2 md:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:aspect-square">
-            <Image src={img} alt="" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" />
-            <span className="absolute left-4 top-4 rounded-full bg-rays-accent px-3 py-1 text-[10px] font-bold uppercase text-rays-white ring-2 ring-rays-white">
-              Featured
-            </span>
-          </div>
-          <div className="text-rays-white">
-            <span className="inline-block rounded-full bg-rays-black px-4 py-1 text-xs font-bold text-rays-white">
-              Care
-            </span>
-            <h3 className="mt-6 font-rays text-2xl font-extrabold uppercase leading-tight md:text-3xl">{post.title}</h3>
-            <p className="mt-4 font-display text-lg leading-relaxed text-rays-white/95">{post.excerpt}</p>
-            <p className="mt-4 text-sm text-rays-white/80">
-              By ANTIFRAGILE · {new Date(post.date).toLocaleDateString("en-IN", { day: "2-digit", month: "2-digit", year: "numeric" })}
-            </p>
-            <Link
-              href={`/blog/${post.slug}`}
-              className="mt-8 inline-flex rounded-full bg-rays-white px-8 py-3 text-sm font-bold uppercase text-rays-accent"
-            >
-              Read more
-            </Link>
+    <section className="border-b border-rays-line bg-rays-cream/40">
+      <div className="mx-auto max-w-[1440px] px-4 py-14 md:px-8 md:py-20">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.35em] text-rays-gray">Skin Journal</p>
+        <h2 className="mt-3 text-center font-rays text-3xl font-extrabold uppercase text-rays-accent md:text-4xl">
+          Featured
+        </h2>
+
+        <div className="mt-10 overflow-hidden rounded-3xl border-2 border-rays-line bg-white shadow-sm">
+          <div className="grid gap-0 md:grid-cols-2">
+            <EditorialImage
+              src={img}
+              alt={alt}
+              aspect="aspect-[4/3] md:aspect-[5/4]"
+              className="rounded-none border-0"
+              priority
+            />
+            <div className="flex flex-col justify-center px-6 py-8 md:px-10 md:py-12">
+              <p className="text-xs text-rays-gray">
+                {new Date(post.date).toLocaleDateString("en-IN", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
+              <h3 className="mt-3 font-rays text-2xl font-extrabold uppercase leading-tight text-rays-black md:text-3xl">
+                {post.title}
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-rays-gray">{post.excerpt}</p>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="mt-8 inline-flex w-fit rounded-full bg-rays-accent px-8 py-3 text-xs font-bold uppercase tracking-wider text-rays-white transition hover:bg-rays-black"
+              >
+                Read article
+              </Link>
+              {posts.length > 1 && (
+                <div className="mt-8 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setIdx((i) => (i - 1 + posts.length) % posts.length)}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-rays-line text-rays-accent transition hover:border-rays-accent"
+                    aria-label="Previous featured post"
+                  >
+                    ←
+                  </button>
+                  <span className="text-xs font-semibold text-rays-gray">
+                    {idx + 1} / {posts.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setIdx((i) => (i + 1) % posts.length)}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-rays-line text-rays-accent transition hover:border-rays-accent"
+                    aria-label="Next featured post"
+                  >
+                    →
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <div className="mt-8 flex justify-end gap-3">
-          <button
-            type="button"
-            onClick={() => setIdx((i) => (i - 1 + posts.length) % posts.length)}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-rays-white text-rays-accent"
-            aria-label="Previous post"
+
+        <p className="mt-8 text-center">
+          <Link
+            href={raysPath("/")}
+            className="text-xs font-bold uppercase tracking-widest text-rays-accent hover:underline"
           >
-            ←
-          </button>
-          <button
-            type="button"
-            onClick={() => setIdx((i) => (i + 1) % posts.length)}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-rays-white text-rays-accent"
-            aria-label="Next post"
-          >
-            →
-          </button>
-        </div>
+            Back to home
+          </Link>
+        </p>
       </div>
-      <p className="mt-6 text-center">
-        <Link href={raysPath("/")} className="text-xs font-bold uppercase tracking-widest text-rays-accent underline">
-          Back to home
-        </Link>
-      </p>
     </section>
   );
 }

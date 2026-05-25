@@ -82,6 +82,7 @@ export function parseCatalogJson(data: unknown): Product[] {
     const hoverImage = parseOptionalImageField(row.hoverImage, "hoverImage", slug);
     const videoUrl = parseOptionalHttpsUrl(row.videoUrl, "videoUrl", slug);
     const videoPoster = parseOptionalImageField(row.videoPoster, "videoPoster", slug);
+    const howToImages = parseOptionalImageList(row.howToImages, "howToImages", slug);
     const lowStockThreshold =
       row.lowStockThreshold === undefined || row.lowStockThreshold === null
         ? undefined
@@ -113,6 +114,7 @@ export function parseCatalogJson(data: unknown): Product[] {
       ...(hoverImage !== undefined ? { hoverImage } : {}),
       ...(videoUrl !== undefined ? { videoUrl } : {}),
       ...(videoPoster !== undefined ? { videoPoster } : {}),
+      ...(howToImages !== undefined ? { howToImages } : {}),
       ...(beforeAfter !== undefined ? { beforeAfter } : {}),
       ...(lowStockThreshold !== undefined && Number.isFinite(lowStockThreshold) && lowStockThreshold >= 0
         ? { lowStockThreshold }

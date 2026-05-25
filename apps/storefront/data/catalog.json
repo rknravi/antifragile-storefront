@@ -7,11 +7,16 @@
     "image": "/products/antifragile-soft-refresh-gel-cleanser.png",
     "thumbnail": "/products/antifragile-soft-refresh-gel-cleanser.png",
     "gallery": [
-      "/products/antifragile-soft-refresh-gel-cleanser.png"
+      "/products/antifragile-soft-refresh-gel-cleanser.png",
+      "/products/antifragile-soft-refresh-gel-cleanser-lifestyle-01.png",
+      "/products/antifragile-soft-refresh-gel-cleanser-lifestyle-02.png",
+      "/products/antifragile-soft-refresh-gel-cleanser-lifestyle-03.png",
+      "/products/antifragile-soft-refresh-gel-cleanser-howto-01.png"
     ],
-    "hoverImage": "/products/antifragile-soft-refresh-gel-cleanser.png",
-    "videoUrl": "https://assets.mixkit.co/videos/preview/mixkit-woman-applying-cream-on-her-face-4212-large.mp4",
-    "videoPoster": "/products/antifragile-soft-refresh-gel-cleanser.png",
+    "hoverImage": "/products/antifragile-soft-refresh-gel-cleanser-lifestyle-01.png",
+    "howToImages": [
+      "/products/antifragile-soft-refresh-gel-cleanser-howto-01.png"
+    ],
     "beforeAfter": {
       "before": "https://images.unsplash.com/photo-1570554886111-e80fcca6a029?w=800&q=80&auto=format&fit=crop",
       "after": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80&auto=format&fit=crop",
@@ -87,11 +92,18 @@
     "image": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
     "thumbnail": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
     "gallery": [
-      "/products/antifragile-airy-veil-silk-cream-moisturizer.png"
+      "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
+      "/products/antifragile-airy-veil-silk-cream-moisturizer-lifestyle-01.png",
+      "/products/antifragile-airy-veil-silk-cream-moisturizer-lifestyle-02.png",
+      "/products/antifragile-airy-veil-silk-cream-moisturizer-lifestyle-03.png",
+      "/products/antifragile-airy-veil-silk-cream-moisturizer-howto-01.png",
+      "/products/antifragile-airy-veil-silk-cream-moisturizer-howto-02.png"
     ],
-    "hoverImage": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
-    "videoUrl": "https://assets.mixkit.co/videos/preview/mixkit-woman-applying-cream-on-her-face-4212-large.mp4",
-    "videoPoster": "/products/antifragile-airy-veil-silk-cream-moisturizer.png",
+    "hoverImage": "/products/antifragile-airy-veil-silk-cream-moisturizer-lifestyle-01.png",
+    "howToImages": [
+      "/products/antifragile-airy-veil-silk-cream-moisturizer-howto-01.png",
+      "/products/antifragile-airy-veil-silk-cream-moisturizer-howto-02.png"
+    ],
     "beforeAfter": {
       "before": "https://images.unsplash.com/photo-1570554886111-e80fcca6a029?w=800&q=80&auto=format&fit=crop",
       "after": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80&auto=format&fit=crop",
@@ -167,11 +179,18 @@
     "image": "/products/antifragile-pre-shift-renewal-serum.png",
     "thumbnail": "/products/antifragile-pre-shift-renewal-serum.png",
     "gallery": [
-      "/products/antifragile-pre-shift-renewal-serum.png"
+      "/products/antifragile-pre-shift-renewal-serum.png",
+      "/products/antifragile-pre-shift-renewal-serum-lifestyle-01.png",
+      "/products/antifragile-pre-shift-renewal-serum-lifestyle-02.png",
+      "/products/antifragile-pre-shift-renewal-serum-lifestyle-03.png",
+      "/products/antifragile-pre-shift-renewal-serum-howto-01.png",
+      "/products/antifragile-pre-shift-renewal-serum-howto-02.png"
     ],
-    "hoverImage": "/products/antifragile-pre-shift-renewal-serum.png",
-    "videoUrl": "https://assets.mixkit.co/videos/preview/mixkit-woman-applying-cream-on-her-face-4212-large.mp4",
-    "videoPoster": "/products/antifragile-pre-shift-renewal-serum.png",
+    "hoverImage": "/products/antifragile-pre-shift-renewal-serum-lifestyle-01.png",
+    "howToImages": [
+      "/products/antifragile-pre-shift-renewal-serum-howto-01.png",
+      "/products/antifragile-pre-shift-renewal-serum-howto-02.png"
+    ],
     "lowStockThreshold": 8,
     "category": "Serum",
     "shortDescription": "Night-forward renewal for smoother, more even-looking skin.",

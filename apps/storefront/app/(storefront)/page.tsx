@@ -16,7 +16,7 @@ export default async function RaysHomePage() {
 
   return (
     <div>
-      <RaysHeroSlideshow products={products} />
+      <RaysHeroSlideshow />
       <RaysTrustBar />
 
       <section className="border-b-2 border-rays-black bg-rays-white py-8">

@@ -24,12 +24,16 @@ const cachedDiskBlog = unstable_cache(
   { revalidate: 30, tags: ["blog"] }
 );
 
+function sortByDateDesc(posts: BlogPost[]): BlogPost[] {
+  return [...posts].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}
+
 export async function getBlogPosts(): Promise<BlogPost[]> {
   const remote = process.env.BLOG_JSON_URL;
   if (remote?.startsWith("https://")) {
-    return fetchBlogFromUrl(remote);
+    return sortByDateDesc(await fetchBlogFromUrl(remote));
   }
-  return cachedDiskBlog();
+  return sortByDateDesc(await cachedDiskBlog());
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {

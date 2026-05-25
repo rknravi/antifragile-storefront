@@ -36,6 +36,48 @@ export function defaultSavedAddress(email: string, apiAddresses: SavedAddress[])
   };
 }
 
+/** All saved shipping addresses for checkout (API + browser snapshot), newest first. */
+export function listCheckoutSavedAddresses(
+  email: string,
+  apiAddresses: SavedAddress[]
+): SavedAddress[] {
+  return mergeSavedAddresses(apiAddresses, readBrowserLastOrderAddress(email));
+}
+
+export function buildGuestCheckoutPrefill(
+  email: string,
+  addresses: SavedAddress[],
+  lastCustomer?: { name?: string; mobile?: string } | null
+): CheckoutPrefillFields {
+  const ship = defaultSavedAddress(email, addresses);
+  const browserContact = readBrowserLastOrderContact(email);
+  const orderName = lastCustomer?.name?.trim() ?? "";
+  const orderMobile = lastCustomer?.mobile?.replace(/\D/g, "") ?? "";
+  const browserMobile = browserContact?.mobile?.replace(/\D/g, "") ?? "";
+
+  return {
+    email: email.trim().toLowerCase(),
+    name: orderName || browserContact?.name?.trim() || "",
+    mobile: orderMobile || browserMobile || "",
+    address: ship?.address ?? "",
+    city: ship?.city ?? "",
+    pin: ship?.pin ?? "",
+    gstNumber: ship?.gstNumber ?? "",
+  };
+}
+
+export function shippingFieldsFromSaved(addr: ShippingAddress): Pick<
+  CheckoutPrefillFields,
+  "address" | "city" | "pin" | "gstNumber"
+> {
+  return {
+    address: addr.address,
+    city: addr.city,
+    pin: addr.pin,
+    gstNumber: addr.gstNumber ?? "",
+  };
+}
+
 export function buildCheckoutPrefill({
   session,
   addresses,

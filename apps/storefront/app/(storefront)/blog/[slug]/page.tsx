@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BlogPostShare } from "@/components/commerce/BlogPostShare";
+import { EditorialImage } from "@/components/rays/EditorialImage";
 import { RaysPageBreadcrumbs } from "@/components/rays/RaysPageBreadcrumbs";
-import { blogPostImage } from "@/lib/blog-images";
+import { blogPostImage, blogPostImageAlt } from "@/lib/blog-images";
 import { getBlogPost, getBlogPosts } from "@/lib/get-blog-posts";
 import { raysPath } from "@/lib/theme-paths";
 
@@ -38,37 +38,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   if (!post) notFound();
 
+  const img = blogPostImage(post);
+  const alt = blogPostImageAlt(post);
+
   return (
-    <article className="bg-rays-white pb-16">
+    <article className="bg-rays-white pb-20">
       <RaysPageBreadcrumbs
         trail={[
           { label: "Blog", href: raysPath("/blog") },
           { label: post.title },
         ]}
       />
-      <div className="mx-auto max-w-3xl px-4 pt-4 md:px-8">
+      <div className="mx-auto max-w-3xl px-4 pt-6 md:px-8">
         <p className="text-xs font-bold uppercase tracking-[0.25em] text-rays-gray">Skin Journal</p>
-        <h1 className="mt-4 font-rays text-4xl font-extrabold uppercase tracking-tight text-rays-black md:text-5xl">
+        <h1 className="mt-4 font-rays text-3xl font-extrabold uppercase leading-tight tracking-tight text-rays-black md:text-5xl">
           {post.title}
         </h1>
-        <p className="mt-5 text-lg leading-8 text-rays-gray">{post.excerpt}</p>
+        <p className="mt-4 text-sm text-rays-gray">
+          {new Date(post.date).toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
+        </p>
+        <p className="mt-6 text-lg leading-relaxed text-rays-gray">{post.excerpt}</p>
 
-        <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-2xl border-2 border-rays-line">
-          <Image
-            src={blogPostImage(post)}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="(max-width:768px) 100vw, 768px"
-            priority
-          />
-        </div>
+        <EditorialImage src={img} alt={alt} aspect="aspect-[16/10]" className="mt-10" priority />
 
-        <div className="mt-10 border-2 border-rays-line bg-rays-cream p-8 leading-8 text-rays-black">
+        <div className="prose-rays mt-12 space-y-6 border-t border-rays-line pt-10 text-base leading-8 text-rays-black">
           {post.body.map((paragraph) => (
-            <p key={paragraph} className="mb-5 last:mb-0">
-              {paragraph}
-            </p>
+            <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
 

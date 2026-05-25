@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { RoutineBundleImage } from "@/components/commerce/RoutineBundleImage";
-import { getActiveProducts } from "@/lib/get-catalog";
-import { ROUTINE_BUNDLES, getBundleProducts } from "@/lib/routine-bundles";
+import { BundleShowcaseMedia } from "@/components/commerce/BundleShowcaseMedia";
+import { ROUTINE_BUNDLES, bundleGalleryImages } from "@/lib/routine-bundles";
 import { brandMarketing } from "@/lib/brand-images";
 import { raysPath } from "@/lib/theme-paths";
 
@@ -12,8 +11,6 @@ export const metadata = {
 };
 
 export default async function RaysCollectionsPage() {
-  const products = await getActiveProducts();
-
   const categoryCollections = [
     {
       title: "Cleanse",
@@ -37,20 +34,19 @@ export default async function RaysCollectionsPage() {
         <section className="mt-16">
           <h2 className="font-rays text-3xl font-extrabold uppercase">Routine bundles</h2>
           <p className="mt-2 max-w-xl text-sm text-rays-gray">
-            Merged ANTIFRAGILE pack shots — all four ritual bundles from the Cleanse · Treat · Seal system.
+            Curated bundle artwork — Cleanse · Treat · Seal ritual sets.
           </p>
           <ul className="mt-10 grid gap-8 sm:grid-cols-2">
             {ROUTINE_BUNDLES.map((bundle) => {
-              const items = getBundleProducts(products, bundle.id);
               return (
                 <li key={bundle.id}>
                   <Link
                     href={raysPath("/shop?bundle=1")}
                     className="group block overflow-hidden rounded-3xl border-2 border-rays-black bg-rays-white shadow-[6px_6px_0_#0A0A0A] transition hover:-translate-y-1"
                   >
-                    <RoutineBundleImage
-                      products={items}
-                      fallbackSrc={bundle.imageSrc}
+                    <BundleShowcaseMedia
+                      images={bundleGalleryImages(bundle)}
+                      alt={bundle.title}
                       size="lg"
                       className="rounded-none border-b-2 border-rays-black"
                     />
