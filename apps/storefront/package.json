@@ -2,39 +2,25 @@
   "name": "antifragile-storefront",
   "version": "0.1.0",
   "private": true,
-
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-
     "postinstall": "prisma generate",
-
     "db:init": "bash scripts/init-local-db.sh",
-
     "db:use:local": "bash scripts/use-db.sh local",
     "db:use:neon": "bash scripts/use-db.sh neon",
-
     "db:status": "prisma migrate status",
-
     "db:dev": "prisma migrate dev",
-
     "db:deploy": "prisma migrate deploy",
-
     "db:generate": "prisma generate",
-
     "db:studio": "prisma studio",
-
     "dev:local": "npm run db:use:local && npm run dev",
-
     "deploy:neon": "npm run db:use:neon && npm run db:deploy && npm run db:generate",
-
     "deploy:git": "git add . && git commit -m \"auto deploy\" && git push origin main",
-
     "release": "npm run deploy:neon && npm run deploy:git"
   },
-
   "dependencies": {
     "@codemirror/commands": "^6.10.3",
     "@codemirror/lang-json": "^6.0.2",
@@ -43,6 +29,7 @@
     "@uiw/codemirror-theme-github": "^4.25.10",
     "@uiw/react-codemirror": "^4.25.10",
     "@uiw/react-json-view": "^2.0.0-alpha.43",
+    "@vercel/analytics": "^2.0.1",
     "dotenv": "^17.4.2",
     "next": "^16.2.6",
     "react": "^18.3.1",
@@ -50,7 +37,6 @@
     "resend": "^4.1.2",
     "server-only": "^0.0.1"
   },
-
   "devDependencies": {
     "@types/node": "^20.14.0",
     "@types/react": "^18.3.3",

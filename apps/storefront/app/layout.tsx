@@ -5,6 +5,7 @@ import { Ga4 } from "@/components/Ga4";
 import { MetaPixel } from "@/components/MetaPixel";
 import { getActiveProducts } from "@/lib/get-catalog";
 import { CommerceShell } from "@/components/commerce/CommerceShell";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
@@ -33,6 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {children}
           <CommerceShell />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
